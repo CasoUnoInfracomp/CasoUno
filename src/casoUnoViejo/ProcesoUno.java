@@ -22,7 +22,7 @@ public class ProcesoUno extends Thread{
 		//System.out.println("guarde producto");
 		try {
             // Esperamos entre 0 y 4 segundos 
-            sleep((int) (Math.random() * 500));
+            sleep((int) (Math.random() * 4000));
         } catch (InterruptedException e) { }
 	}
   }
@@ -37,7 +37,7 @@ public class ProcesoUno extends Thread{
           	
           }
       	}
-      	Producto prod = new Producto("AZUL");
+      	Producto prod = new Producto();
         theBuffer.almacenar(prod) ;
         producidos++;
         System.out.println("Produje el producto: " + prod.getElstring());
@@ -48,7 +48,7 @@ public class ProcesoUno extends Thread{
       	{
       		Thread.yield();
       	}
-      	Producto prod = new Producto("NARANJA");
+      	Producto prod = new Producto();
       	theBuffer.almacenar(prod) ;
       	producidos++;
       	System.out.println("Produje el producto: " + prod.getElstring());

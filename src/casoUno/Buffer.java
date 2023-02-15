@@ -3,7 +3,7 @@ package casoUno;
 
 import java.util.ArrayList; 
 public class Buffer {
-    private ArrayList buff ;
+    private ArrayList buff = new ArrayList <Producto>() ;
     private int n ;
 
     public Buffer (int n) {
@@ -17,11 +17,17 @@ public class Buffer {
     }
     
     
-    public Producto retirar () {
-    	Producto i = (Producto) buff.remove (0) ;
-        return i ;
+    public Producto retirar (String colorrr) {
+    	for(int x = 0; x<buff.size();x++) {
+    		if(((Producto) buff.get(x)).getColor().equals(colorrr)) {
+    			Producto palreturn = (Producto) buff.get(x);
+    			buff.remove(x);
+    			return palreturn;
+    		}
+    	}
+    	return null;
+        
     }
-
 
 	public boolean puedoAlmacenar() {
 		boolean centinela = true;
@@ -30,11 +36,20 @@ public class Buffer {
 		}
 		return centinela;
 	}
-	public boolean puedoRetirar() {
+	public boolean puedoRetirar(String colorr) {
 		boolean centinela = true;
 		if(buff.size() == 0) {
 			centinela = false;
 		}
+		if(centinela)
+		{
+			for(int x = 0; x<buff.size();x++) {
+	    		if(((Producto) buff.get(x)).getColor().equals(colorr)) {
+	    			return true;
+	    		}
+	    	}
+		}
+		centinela = false;
 		return centinela;
 	}
 

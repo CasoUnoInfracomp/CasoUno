@@ -26,10 +26,6 @@ public class ProcesoDos extends Thread{
 		  retirar();
 		  procesar();
 		  almacenar();
-		  try {
-	            // Esperamos entre 0 y 4 segundos 
-	            sleep((int) (Math.random() * 500));
-	        } catch (InterruptedException e) { }
 		  }
 	  }
 	  public synchronized void almacenar() {
@@ -46,7 +42,6 @@ public class ProcesoDos extends Thread{
 			      	}
 			        theBufferOut.almacenar(i) ;
 			        almacenados++;
-			        i=null;
 					//System.out.println("ALMACENO ALGO");
 			        notify () ;
 			      }
@@ -58,7 +53,6 @@ public class ProcesoDos extends Thread{
 			      	//System.out.println("ALMACENO ALGO");
 			      	theBufferOut.almacenar(i) ;
 			        almacenados++;
-			        i=null;
 			        notify () ;
 			      }
 		  
@@ -75,7 +69,7 @@ public class ProcesoDos extends Thread{
 	public synchronized void retirar()
 	  {
 		if(color.equals("AZUL")) {
-        	while (!theBufferIn.puedoRetirar("AZUL")) { 
+        	while (!theBufferIn.puedoRetirar()) { 
             	try {
                     wait();
              	} 
@@ -83,16 +77,16 @@ public class ProcesoDos extends Thread{
              	
              }
         	}
-            i = theBufferIn.retirar("AZUL") ;
+            i = theBufferIn.retirar() ;
             //consumidos++;
             notify () ;
         }
         else {
-        	while (!theBufferIn.puedoRetirar("NARANJA")) 
+        	while (!theBufferIn.puedoRetirar()) 
         	{
         		Thread.yield();
         	}
-        	i = theBufferIn.retirar("NARANJA") ;
+        	i = theBufferIn.retirar() ;
         	//consumidos++;
             notify () ;
         }
